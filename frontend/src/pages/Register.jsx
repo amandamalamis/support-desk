@@ -1,6 +1,9 @@
 import { useState } from "react"
 import { toast } from 'react-toastify'
 import { FaUser } from "react-icons/fa"
+import { useSelector, useDispatch } from 'react-redux'
+import { register } from "../features/auth/authSlice"
+
 
 function Register() {
     //instead of separate state for every field, setting one form data field
@@ -12,8 +15,17 @@ function Register() {
         password2: ''
     })
 
-    //destructure it
+    //destructure form data
     const { name, email, password, password2 } = formData
+
+    const dispatch = useDispatch()
+
+    //state- from authslice initalState
+    const { user, isLoading, isSuccess, message } =
+        useSelector(
+            (state) => state.auth
+        )
+
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -27,6 +39,13 @@ function Register() {
 
         if (password !== password2) {
             toast.error("Passwords do not match.")
+        }
+        else {
+            const userData = {
+                name, email, password
+            }
+            //in authslice dispatch user
+            dispatch(register(userData))
         }
 
     }
