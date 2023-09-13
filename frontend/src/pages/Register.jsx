@@ -3,14 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FaUser } from "react-icons/fa"
 import { useSelector, useDispatch } from 'react-redux'
-import authSlice, { register, reset } from "../features/auth/authSlice"
+import { register, reset } from "../features/auth/authSlice"
+import Spinner from "../components/Spinner"
+
 
 function Register() {
     //instead of separate state for every field, setting one form data field
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-
         password: '',
         password2: ''
     })
@@ -41,7 +42,7 @@ function Register() {
         dispatch(reset())
 
         //useEffect dependencies
-    }, [isError, isSuccess, message, navigate, dispatch, user])
+    }, [isError, isSuccess, user, message, navigate, dispatch])
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -63,10 +64,14 @@ function Register() {
             //in authslice dispatch user
             dispatch(register(userData))
         }
-
     }
-    return (
 
+
+    if (isLoading) {
+        return <Spinner></Spinner>
+    }
+    
+    return (
         <>
             <section className="heading">
                 <h1>
