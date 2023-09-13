@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FaUser } from "react-icons/fa"
 import { useSelector, useDispatch } from 'react-redux'
-import { register } from "../features/auth/authSlice"
-
+import authSlice, { register, reset } from "../features/auth/authSlice"
 
 function Register() {
     //instead of separate state for every field, setting one form data field
@@ -19,13 +19,29 @@ function Register() {
     const { name, email, password, password2 } = formData
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     //state- from authslice initalState
-    const { user, isLoading, isSuccess, message } =
+    const { user, isLoading, isSuccess, isError, message } =
         useSelector(
             (state) => state.auth
         )
 
+    useEffect(() => {
+        if (isError) {
+            //message set in redux, grabbing it and showing it
+            toast.error(message)
+        }
+
+        //Redirect when logged in 
+        if (isSuccess || user) {
+            navigate('/')
+        }
+
+        dispatch(reset())
+
+        //useEffect dependencies
+    }, [isError, isSuccess, message, navigate, dispatch, user])
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -83,5 +99,6 @@ function Register() {
         </>
     )
 }
+
 
 export default Register
