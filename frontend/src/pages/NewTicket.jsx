@@ -17,8 +17,8 @@ function NewTicket() {
 
   const [name] = useState(user.name)
   const [email] = useState(user.email)
-  const [product, setProduct] = useState('iPhone')
-  const [description, setDescription] = useState('Test')
+  const [product, setProduct] = useState('')
+  const [description, setDescription] = useState('')
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -39,6 +39,13 @@ function NewTicket() {
   const onSubmit = (e) => {
     e.preventDefault()
     dispatch(createTicket({ product, description }))
+      .unwrap()
+      .then(() => {
+        //good response so navigate the user to tickets
+        navigate('/tickets')
+        toast.success("New ticket addded.")
+      })
+      .catch(toast.error)
   }
 
   if (isLoading) {
@@ -55,14 +62,14 @@ function NewTicket() {
       <section className='form'>
         <div className="form-group">
           <label htmlFor="name">Customer Name</label>
-          <input type="text" className="form-control" value={name} disabled />
+          <input type="text" className="form-control" value={name} id="name" disabled />
         </div>
         <div className="form-group">
           <label htmlFor="email">Customer Email</label>
-          <input type="text" className="form-control" value={email} disabled />
+          <input type="text" className="form-control" value={email} id="email" disabled />
         </div>
 
-        <form action="" onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
           <div className="form-group">
 
 
