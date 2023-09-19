@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NewTicket from './pages/NewTicket';
+import Tickets from './pages/Tickets';
+import Ticket from './pages/Ticket';
 import PrivateRoute from './components/PrivateRoute';
 
 
@@ -22,6 +24,12 @@ function App() {
             {/* //to create a  private route, wrap it in this way */}
             <Route path='/new-ticket' element={<PrivateRoute></PrivateRoute>} >
               <Route path='/new-ticket' element={<NewTicket></NewTicket>} ></Route>
+            </Route>
+            <Route path='/tickets' element={<PrivateRoute></PrivateRoute>} >
+              <Route path='/tickets' element={<Tickets></Tickets>} ></Route>
+            </Route>
+            <Route path='/ticket/:ticketId' element={<PrivateRoute></PrivateRoute>} >
+              <Route path='/ticket/:tickedId' element={<Ticket></Ticket>} ></Route>
             </Route>
           </Routes>
         </div>

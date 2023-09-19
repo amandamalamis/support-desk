@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     //in dev tools, can see this state
     auth: authReducer,
-    ticket: ticketReducer
+    tickets: ticketReducer
   },
 });

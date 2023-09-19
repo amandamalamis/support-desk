@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { createTicket, reset } from '../features/tickets/ticketSlice'
 import Spinner from '../components/Spinner'
-import { BackButton } from '../components/BackButton'
+import BackButton from '../components/BackButton'
 
 
 function NewTicket() {
 
   //Before we set the local state (component state), get the user from the global state
   const { user } = useSelector((state) => state.auth)
-  const { isLoading, isError, isSuccess, message } = useSelector((state) => state.ticket)
+  const { isLoading, isError, isSuccess, message } = useSelector((state) => state.tickets)
 
 
   const [name] = useState(user.name)
@@ -47,7 +47,7 @@ function NewTicket() {
 
   return (
     <>
-    <BackButton url='/'></BackButton>
+      <BackButton url='/'></BackButton>
       <section className="heading">
         <h1>Create New Ticket</h1>
         <p>Please fill out the form below.</p>
@@ -77,18 +77,17 @@ function NewTicket() {
             </select>
           </div>
           <div className="form-group">
-
-
             <label htmlFor="description">
               Description of the issue
             </label>
             <textarea name="description" id="description" className='form-control' placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            <div className="form-group">
-              <button className="btn btn-block">
-                SUBMIT
-              </button>
-            </div>
           </div>
+          <div className="form-group">
+            <button className="btn btn-block">
+              SUBMIT
+            </button>
+          </div>
+
         </form>
       </section>
     </>
