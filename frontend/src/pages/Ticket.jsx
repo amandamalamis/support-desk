@@ -34,7 +34,7 @@ function Ticket() {
     const { ticket, isLoading, isSuccess, isError, message } = useSelector((state) => state.tickets)
     const { notes, isLoading: notesIsLoading } = useSelector((state) => state.notes)
 
-
+    console.log(notes)
     const params = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -132,15 +132,20 @@ function Ticket() {
                     </div>
                 </form>
             </Modal>
+ console.log(notes)
+            {notes ? (
+               
 
-            {notes.map((note) => (<NoteItem key={note._id} note={note}></NoteItem>))
-            }
-            {
-                ticket.status !== 'closed' && (
-                    <button className='btn btn-block btn-danger' onClick={onTicketClose}>Close Ticket</button>
-                )
-            }
-        </div >
+                notes.map((note) => <NoteItem key={note._id} note={note}></NoteItem>)
+            ) : (
+            <Spinner />
+            )}
+
+            {ticket.status !== 'closed' && (
+                <button className='btn btn-block btn-danger' onClick={onTicketClose}>Close Ticket</button>
+            )}
+
+        </div>
     )
 }
 

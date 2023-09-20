@@ -21,7 +21,7 @@ function Tickets() {
 
 
     useEffect(() => {
-        dispatch((getTickets))
+        dispatch(getTickets())
     }, [dispatch])
 
 

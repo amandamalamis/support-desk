@@ -53,7 +53,7 @@ const getTicket = asyncHandler(async (req, res) => {
 // @access  Private
 
 const createTicket = asyncHandler(async (req, res) => {
-    const { product, description } = reeq.body
+    const { product, description } = req.body
 
     if (!product || !description) {
         res.status(400)
