@@ -43,7 +43,7 @@ function NewTicket() {
       .then(() => {
         //good response so navigate the user to tickets
         navigate('/tickets')
-        toast.success("New ticket addded.")
+        toast.success("New ticket added.")
       })
       .catch(toast.error)
   }
@@ -71,8 +71,6 @@ function NewTicket() {
 
         <form onSubmit={onSubmit}>
           <div className="form-group">
-
-
             <label htmlFor="product">
               Product
             </label>
@@ -94,7 +92,6 @@ function NewTicket() {
               SUBMIT
             </button>
           </div>
-
         </form>
       </section>
     </>

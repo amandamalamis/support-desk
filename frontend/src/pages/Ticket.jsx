@@ -25,7 +25,6 @@ const customStyles = {
 
 Modal.setAppElement('#root')
 
-
 function Ticket() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [noteText, setNoteText] = useState('')
@@ -72,7 +71,7 @@ function Ticket() {
     const openModal = () => setModalIsOpen(true)
     const closeModal = () => setModalIsOpen(false)
 
-    if (isLoading || notesIsLoading) {
+    if (isLoading || notesIsLoading || !ticket) {
         return <Spinner></Spinner>
     }
 
@@ -132,13 +131,13 @@ function Ticket() {
                     </div>
                 </form>
             </Modal>
- console.log(notes)
+            console.log(notes)
             {notes ? (
-               
+
 
                 notes.map((note) => <NoteItem key={note._id} note={note}></NoteItem>)
             ) : (
-            <Spinner />
+                <Spinner />
             )}
 
             {ticket.status !== 'closed' && (

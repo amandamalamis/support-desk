@@ -5,11 +5,9 @@ import Spinner from "../components/Spinner"
 import BackButton from "../components/BackButton"
 import TicketItem from "../components/TicketItem"
 
-
 function Tickets() {
     const { tickets, isLoading, isSuccess } = useSelector((state) => state.tickets)
     const dispatch = useDispatch()
-
 
     useEffect(() => {
         return () => {
@@ -25,14 +23,13 @@ function Tickets() {
     }, [dispatch])
 
 
-    if (isLoading) {
+    if (isLoading || !tickets) {
         return <Spinner></Spinner>
     }
 
     return (
         <>
-            <BackButton url='/'
-            ></BackButton>
+            <BackButton url='/'></BackButton>
             <h1>Tickets</h1>
             <div className="tickets">
                 <div className="ticket-headings">
@@ -42,7 +39,7 @@ function Tickets() {
                     <div></div>
                 </div>
                 {tickets.map((ticket) => (
-                    <TicketItem key={ticket._id} ticket={ticket} >
+                    <TicketItem key={ticket._id} ticket={ticket}>
                     </TicketItem>
                 ))}
             </div>
